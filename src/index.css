@@ -4,6 +4,10 @@
 */
 /* @tailwind directives removed because Tailwind/PostCSS is not configured */
 /* Estilos globales base */
+@import "tailwindcss";
+@import "./styles/corporate-styles.css";
+
+/* Resto de tu CSS existente... */
 * {
   box-sizing: border-box;
 }

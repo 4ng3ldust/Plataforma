@@ -1,247 +1,267 @@
-import React, { useState } from 'react';
-import { useFormStore } from '../stores/useFormStore';
-import './FormPreview.css'; // Importamos los estilos adicionales
+// src/components/FormPreview.tsx
+import React from 'react'
+import { useFormStore } from '../stores/useFormStore'
+import type { DraggableField, FieldType } from '../types/fields'
+import {
+  CalendarIcon,
+  MapPinIcon,
+  PhotoIcon,
+  PencilIcon,
+  NumberedListIcon,
+  ListBulletIcon,
+  EyeIcon,
+  DocumentIcon,
+  UserIcon,
+  EnvelopeIcon,
+  PhoneIcon,
+  LockClosedIcon
+} from '@heroicons/react/24/outline'
 
-const FormPreview: React.FC = () => {
-  // Acceder directamente a los campos desde el store con valor por defecto
-  const fields = useFormStore(state => state.fields) || [];
-  const [formValues, setFormValues] = useState<Record<string, any>>({});
+interface FormFieldProps {
+  field: DraggableField
+  isSelected: boolean
+  onSelect: () => void
+}
 
-  // Para depuración - Descomentar si necesitas ver el estado del store
-  // console.log('Estado del store:', useFormStore.getState());
+const FormField: React.FC<FormFieldProps> = ({ field, isSelected, onSelect }) => {
+  const { basic, validation } = field.properties
+  const title = basic.titleText || field.type
+  const placeholder = basic.suggestionText || ''
+  const required = validation.required
 
-  // Función para manejar cambios en los campos del formulario
-  const handleFieldChange = (fieldId: string, value: any) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [fieldId]: value,
-    }));
-  };
+  const baseClasses = `
+    relative mb-4 p-3 rounded-lg border transition-all duration-200 cursor-pointer
+    ${isSelected 
+      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md' 
+      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
+    }
+    bg-white dark:bg-gray-800
+  `
 
-  // Función para renderizar cada tipo de campo
-  const renderField = (field: any) => {
-    if (!field) return null;
-    
-    const value = formValues[field.id] || field.properties?.advanced?.defaultValue || '';
-    const titleText = field.properties?.basic?.titleText || 'Campo sin título';
-    const isRequired = field.properties?.validation?.required || false;
-    const placeholderText = field.properties?.basic?.suggestionText || '';
-
+  const renderFieldByType = () => {
     switch (field.type) {
       case 'pagina':
         return (
-          <div className="form-header">
-            <h2 className="text-xl font-bold">{titleText}</h2>
+          <div className="text-center py-6">
+            <DocumentIcon className="w-12 h-12 mx-auto text-blue-500 mb-2" />
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              {title}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">Página del formulario</p>
           </div>
-        );
+        )
 
       case 'seccion':
         return (
-          <div className="border-b border-gray-300 mb-4 pb-1">
-            <h3 className="text-lg font-semibold text-gray-700">{titleText}</h3>
+          <div className="border-l-4 border-blue-500 pl-4 py-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+              {title}
+            </h3>
+            <p className="text-sm text-gray-500">Sección del formulario</p>
           </div>
-        );
+        )
 
       case 'mensaje':
         return (
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mb-4 rounded-r">
-            <p className="text-sm text-blue-700">{titleText}</p>
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <EyeIcon className="w-5 h-5 text-blue-500" />
+              <span className="font-medium text-gray-900 dark:text-white">{title}</span>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              {placeholder || 'Mensaje informativo para el usuario'}
+            </p>
           </div>
-        );
+        )
 
       case 'numerico':
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <input
-              type="number"
-              className="field-input"
-              placeholder={placeholderText}
-              value={value}
-              onChange={(e) => handleFieldChange(field.id, e.target.value)}
-              required={isRequired}
-            />
+            <div className="relative">
+              <NumberedListIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="number"
+                placeholder={placeholder || 'Ingresa un número'}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                disabled
+              />
+            </div>
           </div>
-        );
+        )
 
       case 'fecha_hora':
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <input
-              type="date"
-              className="field-input"
-              value={value}
-              onChange={(e) => handleFieldChange(field.id, e.target.value)}
-              required={isRequired}
-            />
+            <div className="relative">
+              <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="datetime-local"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                disabled
+              />
+            </div>
           </div>
-        );
+        )
 
       case 'opciones':
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <select
-              className="field-input"
-              value={value}
-              onChange={(e) => handleFieldChange(field.id, e.target.value)}
-              required={isRequired}
-            >
-              <option value="">Seleccionar...</option>
-              {field.options?.map((option: any) => (
-                <option key={option.id} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <input type="radio" className="w-4 h-4 text-blue-600" disabled />
+                <span className="text-gray-700 dark:text-gray-300">Opción 1</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="radio" className="w-4 h-4 text-blue-600" disabled />
+                <span className="text-gray-700 dark:text-gray-300">Opción 2</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="radio" className="w-4 h-4 text-blue-600" disabled />
+                <span className="text-gray-700 dark:text-gray-300">Opción 3</span>
+              </div>
+            </div>
           </div>
-        );
+        )
 
       case 'ubicacion':
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <div className="flex items-center">
-              <div className="flex-1 border border-gray-300 rounded-md p-2 bg-gray-50 text-sm text-gray-500">
-                {value || 'Sin ubicación seleccionada'}
-              </div>
-              <button
-                className="ml-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors btn-action"
-                onClick={() => handleFieldChange(field.id, 'Ubicación simulada (37.7749, -122.4194)')}
-                type="button"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-              </button>
+            <div className="relative">
+              <MapPinIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder={placeholder || 'Seleccionar ubicación'}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                disabled
+              />
+            </div>
+            <div className="mt-2 h-32 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+              <MapPinIcon className="w-8 h-8 text-gray-400" />
+              <span className="ml-2 text-gray-500">Vista del mapa</span>
             </div>
           </div>
-        );
+        )
 
       case 'imagen':
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <div className="border-2 border-dashed border-gray-300 rounded-md p-4 text-center">
-              {value ? (
-                <div className="field-image-placeholder">
-                  <span>Vista previa de imagen</span>
-                </div>
-              ) : (
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => handleFieldChange(field.id, 'imagen_seleccionada')}
-                  type="button"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-auto mb-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                  </svg>
-                  Tomar foto
-                </button>
-              )}
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+              <PhotoIcon className="w-12 h-12 mx-auto text-gray-400 mb-2" />
+              <p className="text-gray-500">Toca para tomar foto o seleccionar imagen</p>
             </div>
           </div>
-        );
+        )
 
-      // Implementa los demás casos según sea necesario...
+      case 'firma':
+        return (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
+            </label>
+            <div className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 h-32 bg-gray-50 dark:bg-gray-700 flex items-center justify-center">
+              <PencilIcon className="w-8 h-8 text-gray-400 mr-2" />
+              <span className="text-gray-500">Área de firma</span>
+            </div>
+          </div>
+        )
 
       default:
         return (
-          <div className="form-field">
-            <label className="field-label">
-              {titleText}
-              {isRequired && <span className="field-required">*</span>}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {title} {required && <span className="text-red-500">*</span>}
             </label>
-            <div className="border border-gray-300 rounded-md p-3 bg-gray-50 text-sm text-gray-500">
-              Campo tipo: {field.type}
-            </div>
+            <input
+              type="text"
+              placeholder={placeholder || `Campo ${field.type}`}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              disabled
+            />
           </div>
-        );
+        )
     }
-  };
-
-  // Función para renderizar el botón de envío del formulario
-  const renderSubmitButton = () => {
-    return (
-      <div className="mt-6">
-        <button
-          type="submit"
-          className="btn-submit"
-        >
-          Enviar Formulario
-        </button>
-      </div>
-    );
-  };
-
-  // Función para manejar el envío del formulario
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Formulario enviado con éxito!');
-    console.log('Valores del formulario:', formValues);
-  };
+  }
 
   return (
-    <div className="w-full h-full bg-gray-100 p-4 overflow-y-auto">
-      <h2 className="text-lg font-semibold mb-4">Vista Previa</h2>
+    <div className={baseClasses} onClick={onSelect}>
+      {renderFieldByType()}
       
-      {/* Contenedor del dispositivo móvil */}
-      <div className="mobile-device">
-        {/* Barra de estado del dispositivo */}
-        <div className="status-bar">
-          <div>9:41 AM</div>
-          <div className="flex space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-.17a3 3 0 01.83-2.07l3.58-3.58a1 1 0 00.29-.71V6a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v2.17a3 3 0 01-.83 2.07l-3.58 3.58a1 1 0 01-.7.29H7a3 3 0 00-3 3v2a1 1 0 001 1h11a1 1 0 001-1v-2a3 3 0 00-3-3h-.17a1 1 0 01-.7-.29l-.83-.83A1 1 0 0112 12h1a1 1 0 001-1V8a1 1 0 00-1-1h-1z" />
-            </svg>
-          </div>
+      {/* Badge de campo seleccionado */}
+      {isSelected && (
+        <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+          Seleccionado
         </div>
-        
-        {/* Contenido del formulario */}
-        <div className="form-content">
-          <form onSubmit={handleSubmit} className="p-4">
-            {/* Header del formulario */}
-            <div className="form-header">
-              <h1 className="text-xl font-bold">Formulario</h1>
-            </div>
-            
-            {/* Campos del formulario */}
-            {Array.isArray(fields) && fields.map((field: any) => (
-              <React.Fragment key={field.id}>
-                {renderField(field)}
-              </React.Fragment>
-            ))}
-            
-            {/* Botón de envío */}
-            {renderSubmitButton()}
-          </form>
+      )}
+    </div>
+  )
+}
+
+const FormPreview: React.FC = () => {
+  const { fields, selectedFieldId, selectField, mode } = useFormStore()
+
+  if (fields.length === 0) {
+    return (
+      <div className="h-full flex items-center justify-center text-center p-8">
+        <div>
+          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <DocumentIcon className="w-8 h-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            Formulario vacío
+          </h3>
+          <p className="text-gray-500 max-w-sm">
+            Arrastra campos desde el panel izquierdo para comenzar a diseñar tu formulario
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-full overflow-auto">
+      {/* Header del formulario */}
+      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6">
+        <h1 className="text-xl font-semibold">Vista Previa del Formulario</h1>
+        <p className="text-blue-100 text-sm mt-1">
+          {fields.length} campo{fields.length !== 1 ? 's' : ''} • Modo {mode === 'edit' ? 'Edición' : 'Vista Previa'}
+        </p>
+      </div>
+
+      {/* Contenedor tipo móvil */}
+      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div className="p-6">
+          {fields.map((field) => (
+            <FormField
+              key={field.id}
+              field={field}
+              isSelected={selectedFieldId === field.id}
+              onSelect={() => selectField(field.id)}
+            />
+          ))}
+          
+          {/* Botón de envío simulado */}
+          <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors mt-6">
+            Enviar Formulario
+          </button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FormPreview;
+export default FormPreview

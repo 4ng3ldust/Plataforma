@@ -1,19 +1,56 @@
-/* Layout_simplified.css */
+/* Layout_simplified.css - Versión Corporativa APPTUALIZATE */
 :root {
-  --primary-color: #1e3a8a;
-  --primary-hover: #2563eb;
-  --secondary-color: #2c3e50;
+  /* 🎯 Paleta Corporativa Azul */
+  --primary-color: #3b82f6;        /* Azul principal corporativo */
+  --primary-hover: #2563eb;        /* Azul hover */
+  --primary-light: #60a5fa;        /* Azul claro */
+  --primary-dark: #1e40af;         /* Azul oscuro */
+  
+  --secondary-color: #06b6d4;      /* Cyan/turquesa del logo */
+  --secondary-hover: #0891b2;      /* Cyan hover */
+  --secondary-dark: #0e7490;       /* Cyan oscuro */
+  
+  --accent-color: #4f46e5;         /* Índigo acento */
+  --accent-teal: #0d9488;          /* Verde azulado */
+  
+  /* 🌙 Grises corporativos */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  
+  /* 📝 Textos */
   --text-light: #ffffff;
-  --text-dark: #333333;
-  --bg-light: #f5f5f5;
-  --border-color: #dddddd;
+  --text-dark: var(--gray-900);
+  --text-muted: var(--gray-500);
+  
+  /* 🎨 Fondos */
+  --bg-light: var(--gray-50);
+  --bg-white: #ffffff;
+  --border-color: var(--gray-200);
+  
+  /* 🚨 Estados */
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  
+  /* 🌈 Gradientes corporativos */
+  --gradient-corporate: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  --gradient-sidebar: linear-gradient(180deg, var(--primary-dark) 0%, var(--gray-800) 100%);
+  --gradient-header: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
 }
 
 /* Estilos globales */
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: var(--text-dark);
   background-color: var(--bg-light);
 }
@@ -21,102 +58,124 @@ body {
 /* Contenedor principal */
 .app-container {
   display: grid !important;
-  grid-template-columns: 250px 1fr 300px !important;
+  grid-template-columns: 200px 1fr 280px !important;
   grid-template-rows: auto 1fr !important;
   min-height: 100vh !important;
   width: 100% !important;
+  position: relative !important;
 }
 
-/* Barra superior */
+/* 🎨 Barra superior corporativa */
 .app-header {
   grid-column: 1 / -1 !important;
-  background-color: var(--primary-color) !important;
+  background: var(--gradient-header) !important;
   color: var(--text-light) !important;
-  padding: 1rem !important;
+  padding: 1rem 2rem !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.app-title {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
 }
 
 .app-title-logo {
-  width: 80px;
-  height: 40px;
-  margin-right: 16px;
-}
-.app-title {
-  font-size: 1.5rem !important;
-  font-weight: 600 !important;
-}
-.app-actions {
-  display: flex !important;
-  gap: 0.5rem !important;
+  width: 60px;
+  height: 30px;
+  margin-right: 12px;
+  filter: brightness(1.1);
 }
 
-/* Sidebar */
+/* 🎨 Sidebar moderno */
 .app-sidebar {
-  background-color: var(--secondary-color) !important;
+  background: var(--gradient-sidebar) !important;
   color: var(--text-light) !important;
   padding: 1rem !important;
   overflow-y: auto !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar-section {
+  margin-bottom: 2rem !important;
 }
 
 .sidebar-title {
-  font-size: 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
   margin-bottom: 1rem !important;
   padding-bottom: 0.5rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
 }
 
 .field-palette {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 0.5rem !important;
-  margin-bottom: 1.5rem !important;
 }
 
 .palette-item {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  border-radius: 0.25rem !important;
-  padding: 0.5rem !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem !important;
   display: flex !important;
-  flex-direction: column !important;
   align-items: center !important;
-  justify-content: center !important;
+  gap: 0.75rem !important;
   cursor: grab !important;
-  transition: background-color 0.2s !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 .palette-item:hover {
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.palette-item:active {
+  cursor: grabbing !important;
+  transform: scale(0.98) !important;
 }
 
 .palette-item-icon {
-  font-size: 1.5rem !important;
-  margin-bottom: 0.25rem !important;
+  font-size: 1.25rem !important;
+  flex-shrink: 0 !important;
 }
 
 .palette-item-label {
-  font-size: 0.75rem !important;
-  text-align: center !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  flex-grow: 1 !important;
 }
 
-/* Área del formulario */
+/* 🎨 Área del formulario mejorada */
 .form-area {
-  padding: 1rem !important;
+  padding: 2rem !important;
   overflow-y: auto !important;
+  background: var(--bg-light) !important;
 }
 
 .form-container {
-  background-color: white !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  background: var(--bg-white) !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   overflow: hidden !important;
+  border: 1px solid var(--border-color) !important;
 }
 
 .form-header {
-  background-color: var(--secondary-color) !important;
+  background: var(--gradient-corporate) !important;
   color: var(--text-light) !important;
-  padding: 1rem !important;
+  padding: 1.5rem 2rem !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -124,40 +183,101 @@ body {
 
 .form-title {
   margin: 0 !important;
-  font-size: 1.25rem !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.form-header-actions {
+  display: flex !important;
+  gap: 0.75rem !important;
 }
 
 .form-content {
-  padding: 1rem !important;
-  min-height: 300px !important;
+  padding: 2rem !important;
+  min-height: 500px !important;
+  background: var(--bg-white) !important;
 }
 
+/* 🎨 Estado vacío mejorado */
 .form-empty {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  height: 200px !important;
-  color: #999 !important;
-  border: 2px dashed #ddd !important;
-  border-radius: 0.5rem !important;
+  height: 400px !important;
+  border: 2px dashed var(--border-color) !important;
+  border-radius: 1rem !important;
+  background: var(--gray-50) !important;
 }
 
-/* Campos del formulario */
-.form-field {
-  border: 1px solid var(--border-color) !important;
-  border-radius: 0.25rem !important;
+.empty-state {
+  text-align: center !important;
+  max-width: 400px !important;
+}
+
+.empty-icon {
+  font-size: 4rem !important;
   margin-bottom: 1rem !important;
+  opacity: 0.6 !important;
+}
+
+.empty-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 0 0 0.5rem 0 !important;
+  color: var(--text-dark) !important;
+}
+
+.empty-description {
+  color: var(--text-muted) !important;
+  margin: 0 0 1rem 0 !important;
+  line-height: 1.5 !important;
+}
+
+.empty-hint {
+  background: rgba(59, 130, 246, 0.1) !important;
+  color: var(--primary-color) !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+/* 🎨 Contenedor de campos */
+.fields-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+.field-wrapper {
+  animation: fadeInUp 0.3s ease-out !important;
+}
+
+/* 🎨 Campos del formulario mejorados */
+.form-field {
+  border: 2px solid var(--border-color) !important;
+  border-radius: 1rem !important;
   overflow: hidden !important;
+  background: var(--bg-white) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  cursor: pointer !important;
+}
+
+.form-field:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
 .form-field.selected {
   border-color: var(--primary-color) !important;
-  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.3) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  background: rgba(59, 130, 246, 0.02) !important;
 }
 
 .form-field-header {
-  background-color: #f0f0f0 !important;
-  padding: 0.5rem !important;
+  background: var(--gray-50) !important;
+  padding: 1rem 1.5rem !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -165,12 +285,14 @@ body {
 }
 
 .form-field-title {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+  color: var(--text-dark) !important;
+  font-size: 1rem !important;
 }
 
 .field-actions {
   display: flex !important;
-  gap: 0.25rem !important;
+  gap: 0.5rem !important;
 }
 
 .field-action-btn {
@@ -178,78 +300,143 @@ body {
   border: none !important;
   cursor: pointer !important;
   font-size: 1rem !important;
-  padding: 0.25rem !important;
-  border-radius: 0.25rem !important;
+  padding: 0.375rem !important;
+  border-radius: 0.375rem !important;
+  color: var(--text-muted) !important;
+  transition: all 0.2s ease !important;
 }
 
 .field-action-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05) !important;
+  background: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  transform: scale(1.1) !important;
 }
 
 .form-field-content {
-  padding: 1rem !important;
+  padding: 1.5rem !important;
 }
 
-/* Panel de propiedades */
+/* 🎨 Panel de propiedades corporativo */
 .properties-panel {
-  background-color: white !important;
+  background: var(--bg-white) !important;
   border-left: 1px solid var(--border-color) !important;
   overflow-y: auto !important;
+  box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1) !important;
 }
 
 .properties-header {
-  background-color: var(--secondary-color) !important;
+  background: var(--gradient-corporate) !important;
   color: var(--text-light) !important;
-  padding: 1rem !important;
+  padding: 1.5rem !important;
 }
 
 .properties-title {
   margin: 0 !important;
   font-size: 1.25rem !important;
+  font-weight: 600 !important;
 }
 
 .properties-content {
-  padding: 1rem !important;
+  padding: 1.5rem !important;
 }
 
-/* Botones */
-.btn {
-  padding: 0.5rem 1rem !important;
-  border-radius: 0.25rem !important;
+/* 🎨 Botones flotantes modernos */
+.floating-buttons {
+  position: fixed !important;
+  right: 2rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  z-index: 1000 !important;
+}
+
+.floating-btn {
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+  border-radius: 50% !important;
   border: none !important;
   cursor: pointer !important;
-  font-weight: 500 !important;
-  transition: background-color 0.2s !important;
+  font-size: 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.floating-btn:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.floating-btn:active {
+  transform: scale(0.95) !important;
+}
+
+.floating-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.floating-btn-primary {
+  background: var(--gradient-corporate) !important;
+  color: var(--text-light) !important;
+}
+
+.floating-btn-secondary {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.floating-btn-danger {
+  background: var(--error-color) !important;
+  color: var(--text-light) !important;
+}
+
+/* 🎨 Botones corporativos mejorados */
+.btn {
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
 }
 
 .btn-primary {
-  background-color: var(--primary-color) !important;
-  color: white !important;
+  background: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.25) !important;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover) !important;
+  background: var(--primary-hover) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.25), 0 4px 6px -2px rgba(59, 130, 246, 0.1) !important;
 }
 
 .btn-secondary {
-  background-color: #f0f0f0 !important;
+  background: var(--gray-100) !important;
   color: var(--text-dark) !important;
+  border: 1px solid var(--border-color) !important;
 }
 
 .btn-secondary:hover {
-  background-color: #e0e0e0 !important;
+  background: var(--gray-200) !important;
+  border-color: var(--gray-300) !important;
+  transform: translateY(-1px) !important;
 }
 
-.btn-success {
-  background-color: #28a745 !important;
-  color: white !important;
-}
-
-.btn-success:hover {
-  background-color: #218838 !important;
-}
-
-/* Utilidades */
+/* 🎨 Utilidades */
 .flex {
   display: flex !important;
 }
@@ -260,4 +447,436 @@ body {
 
 .space-y-2 > * + * {
   margin-top: 0.5rem !important;
+}
+
+/* 🎨 Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsividad */
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto 1fr auto !important;
+  }
+  
+  .app-sidebar,
+  .properties-panel {
+    position: fixed !important;
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+  }
+  
+  .properties-panel {
+    right: 0 !important;
+    transform: translateX(100%) !important;
+  }
+  
+  .floating-buttons {
+    right: 1rem !important;
+    gap: 0.5rem !important;
+  }
+  
+  .floating-btn {
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+/* 🎨 Barra superior corporativa */
+.app-header {
+  grid-column: 1 / -1 !important;
+  background: var(--gradient-header) !important;
+  color: var(--text-light) !important;
+  padding: 1rem 2rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  position: relative !important;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.app-title {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.app-title-logo {
+  width: 80px;
+  height: 40px;
+  margin-right: 15px;
+  filter: brightness(1.1);
+}
+
+.app-actions {
+  display: flex !important;
+  gap: 0.75rem !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* 🎨 Sidebar corporativo con gradiente */
+.app-sidebar {
+  background: var(--gradient-sidebar) !important;
+  color: var(--text-light) !important;
+  padding: 1.5rem !important;
+  overflow-y: auto !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  position: relative !important;
+}
+
+.app-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.sidebar-title {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.field-palette {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.75rem !important;
+  margin-bottom: 2rem !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.palette-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: grab !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.palette-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.palette-item:active {
+  cursor: grabbing !important;
+  transform: translateY(0px) scale(0.98) !important;
+}
+
+.palette-item-icon {
+  font-size: 1.5rem !important;
+  margin-bottom: 0.25rem !important;
+  color: var(--secondary-color) !important;
+}
+
+.palette-item-label {
+  font-size: 0.75rem !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+}
+
+/* 🎨 Área del formulario mejorada */
+.form-area {
+  padding: 1.5rem !important;
+  overflow-y: auto !important;
+  background: var(--bg-light) !important;
+}
+
+.form-container {
+  background: var(--bg-white) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.form-header {
+  background: var(--gradient-corporate) !important;
+  color: var(--text-light) !important;
+  padding: 1.5rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  position: relative !important;
+}
+
+.form-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.form-title {
+  margin: 0 !important;
+  font-size: 1.375rem !important;
+  font-weight: 600 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.form-content {
+  padding: 2rem !important;
+  min-height: 400px !important;
+  background: var(--bg-white) !important;
+}
+
+.form-empty {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 300px !important;
+  color: var(--text-muted) !important;
+  border: 2px dashed var(--border-color) !important;
+  border-radius: 0.75rem !important;
+  background: var(--gray-50) !important;
+  font-weight: 500 !important;
+}
+
+/* 🎨 Campos del formulario mejorados */
+.form-field {
+  border: 2px solid var(--border-color) !important;
+  border-radius: 0.75rem !important;
+  margin-bottom: 1rem !important;
+  overflow: hidden !important;
+  background: var(--bg-white) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+.form-field:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.form-field.selected {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  background: rgba(59, 130, 246, 0.02) !important;
+}
+
+.form-field-header {
+  background: var(--gray-50) !important;
+  padding: 0.75rem 1rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.form-field-title {
+  font-weight: 600 !important;
+  color: var(--text-dark) !important;
+}
+
+.field-actions {
+  display: flex !important;
+  gap: 0.5rem !important;
+}
+
+.field-action-btn {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  padding: 0.375rem !important;
+  border-radius: 0.375rem !important;
+  color: var(--text-muted) !important;
+  transition: all 0.2s ease !important;
+}
+
+.field-action-btn:hover {
+  background: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  transform: scale(1.1) !important;
+}
+
+.form-field-content {
+  padding: 1.5rem !important;
+}
+
+/* 🎨 Panel de propiedades corporativo */
+.properties-panel {
+  background: var(--bg-white) !important;
+  border-left: 1px solid var(--border-color) !important;
+  overflow-y: auto !important;
+  box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.properties-header {
+  background: var(--gradient-corporate) !important;
+  color: var(--text-light) !important;
+  padding: 1.5rem !important;
+  position: relative !important;
+}
+
+.properties-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.properties-title {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.properties-content {
+  padding: 1.5rem !important;
+}
+
+/* 🎨 Botones corporativos mejorados */
+.btn {
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+.btn-primary {
+  background: var(--gradient-corporate) !important;
+  color: var(--text-light) !important;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.25) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.25), 0 4px 6px -2px rgba(59, 130, 246, 0.1) !important;
+}
+
+.btn-primary:active {
+  transform: translateY(0) !important;
+}
+
+.btn-secondary {
+  background: var(--gray-100) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-secondary:hover {
+  background: var(--gray-200) !important;
+  border-color: var(--gray-300) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-success {
+  background: var(--success-color) !important;
+  color: var(--text-light) !important;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.25) !important;
+}
+
+.btn-success:hover {
+  background: #059669 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* 🎨 Utilidades mejoradas */
+.flex {
+  display: flex !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem !important;
+}
+
+/* 🌙 Modo oscuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-light: var(--gray-900);
+    --bg-white: var(--gray-800);
+    --text-dark: var(--gray-100);
+    --border-color: var(--gray-700);
+  }
+}
+
+/* 📱 Responsividad */
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto 1fr auto !important;
+  }
+  
+  .app-sidebar,
+  .properties-panel {
+    position: fixed !important;
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+  }
+  
+  .properties-panel {
+    right: 0 !important;
+    transform: translateX(100%) !important;
+  }
 }
