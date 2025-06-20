@@ -1,0 +1,71 @@
+/*
+  The following Tailwind directives require Tailwind CSS and PostCSS setup.
+  Make sure your project is configured to process these directives.
+*/
+/* @tailwind directives removed because Tailwind/PostCSS is not configured */
+/* Estilos globales base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clases personalizadas para APPTUALIZATE */
+/* Custom component styles without Tailwind @apply */
+.canvas-bg {
+  background-color: #f9fafb;
+}
+@media (prefers-color-scheme: dark) {
+  .canvas-bg {
+    background-color: #1f2937;
+  }
+}
+
+.panel {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  .panel {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.field-item {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+@media (prefers-color-scheme: dark) {
+  .field-item {
+    background-color: #1f2937;
+    border-color: #374151;
+  }
+}
+
+/* Fix para iconos de Heroicons */
+svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}

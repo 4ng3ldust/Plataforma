@@ -1,0 +1,263 @@
+/* Layout_simplified.css */
+:root {
+  --primary-color: #1e3a8a;
+  --primary-hover: #2563eb;
+  --secondary-color: #2c3e50;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --bg-light: #f5f5f5;
+  --border-color: #dddddd;
+}
+
+/* Estilos globales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+}
+
+/* Contenedor principal */
+.app-container {
+  display: grid !important;
+  grid-template-columns: 250px 1fr 300px !important;
+  grid-template-rows: auto 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+}
+
+/* Barra superior */
+.app-header {
+  grid-column: 1 / -1 !important;
+  background-color: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  padding: 1rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.app-title-logo {
+  width: 80px;
+  height: 40px;
+  margin-right: 16px;
+}
+.app-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+.app-actions {
+  display: flex !important;
+  gap: 0.5rem !important;
+}
+
+/* Sidebar */
+.app-sidebar {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-light) !important;
+  padding: 1rem !important;
+  overflow-y: auto !important;
+}
+
+.sidebar-title {
+  font-size: 1rem !important;
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.field-palette {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.palette-item {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: grab !important;
+  transition: background-color 0.2s !important;
+}
+
+.palette-item:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.palette-item-icon {
+  font-size: 1.5rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.palette-item-label {
+  font-size: 0.75rem !important;
+  text-align: center !important;
+}
+
+/* Área del formulario */
+.form-area {
+  padding: 1rem !important;
+  overflow-y: auto !important;
+}
+
+.form-container {
+  background-color: white !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.form-header {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-light) !important;
+  padding: 1rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.form-title {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+}
+
+.form-content {
+  padding: 1rem !important;
+  min-height: 300px !important;
+}
+
+.form-empty {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 200px !important;
+  color: #999 !important;
+  border: 2px dashed #ddd !important;
+  border-radius: 0.5rem !important;
+}
+
+/* Campos del formulario */
+.form-field {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0.25rem !important;
+  margin-bottom: 1rem !important;
+  overflow: hidden !important;
+}
+
+.form-field.selected {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.3) !important;
+}
+
+.form-field-header {
+  background-color: #f0f0f0 !important;
+  padding: 0.5rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.form-field-title {
+  font-weight: 500 !important;
+}
+
+.field-actions {
+  display: flex !important;
+  gap: 0.25rem !important;
+}
+
+.field-action-btn {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  padding: 0.25rem !important;
+  border-radius: 0.25rem !important;
+}
+
+.field-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.form-field-content {
+  padding: 1rem !important;
+}
+
+/* Panel de propiedades */
+.properties-panel {
+  background-color: white !important;
+  border-left: 1px solid var(--border-color) !important;
+  overflow-y: auto !important;
+}
+
+.properties-header {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-light) !important;
+  padding: 1rem !important;
+}
+
+.properties-title {
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+}
+
+.properties-content {
+  padding: 1rem !important;
+}
+
+/* Botones */
+.btn {
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.25rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0 !important;
+  color: var(--text-dark) !important;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0 !important;
+}
+
+.btn-success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.btn-success:hover {
+  background-color: #218838 !important;
+}
+
+/* Utilidades */
+.flex {
+  display: flex !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem !important;
+}
